@@ -12,8 +12,8 @@ import pytest
 import torch
 from fastapi.testclient import TestClient
 
-from breeze_infer import api
-from breeze_infer.api import (
+from breeze_tts.infer import api
+from breeze_tts.infer.api import (
     DEFAULT_CFG_SCALE,
     MAX_BATCH_TEXTS,
     _iter_seeded_audio_chunks,
@@ -21,10 +21,10 @@ from breeze_infer.api import (
     app,
     speech,
 )
-from breeze_infer.api import (
+from breeze_tts.infer.api import (
     MAX_NEW_TOKENS as API_MAX_NEW_TOKENS,
 )
-from breeze_infer.api import (
+from breeze_tts.infer.api import (
     MAX_SEQ_LEN as API_MAX_SEQ_LEN,
 )
 from infer import MAX_NEW_TOKENS as CLI_MAX_NEW_TOKENS
@@ -87,7 +87,7 @@ def test_streaming_reseeds_immediately_before_model_sampling(monkeypatch) -> Non
             yield "chunk"
 
     monkeypatch.setattr(
-        "breeze_infer.api.set_all_seeds",
+        "breeze_tts.infer.api.set_all_seeds",
         lambda seed: events.append(("seed", seed)),
     )
 
@@ -435,7 +435,7 @@ def test_main_reports_invalid_model_as_usage_error(
     tmp_path, monkeypatch, capsys, no_download
 ) -> None:
     monkeypatch.chdir(tmp_path)
-    monkeypatch.setattr("sys.argv", ["breeze_infer.api", "missing-dir"])
+    monkeypatch.setattr("sys.argv", ["breeze_tts.infer.api", "missing-dir"])
 
     with pytest.raises(SystemExit) as exc_info:
         api.main()

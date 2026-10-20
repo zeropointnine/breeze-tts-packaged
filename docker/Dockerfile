@@ -40,4 +40,4 @@ RUN python docker/smoke_check.py \
         tests/test_warmup_profile.py
 
 ENTRYPOINT ["/opt/breeze-infer/docker/entrypoint.sh"]
-CMD ["python", "-m", "breeze_infer.api", "--help"]
+CMD ["python", "-m", "breeze_tts.infer.api", "--help"]

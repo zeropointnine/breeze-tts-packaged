@@ -678,7 +678,7 @@ class FastBreezeStreamingRuntime:
             )
         self._warmup_profile = profile
 
-        from breeze_infer.templates import get_template, prepare_inputs
+        from breeze_tts.infer.templates import get_template, prepare_inputs
 
         request_spec = profile.warmup_request
         synthetic_results: list[dict[str, Any]] = []

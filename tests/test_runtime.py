@@ -4,7 +4,7 @@ import sys
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
-from breeze_infer.runtime import load_runtime
+from breeze_tts.infer.runtime import load_runtime
 
 
 def test_load_runtime_disables_inapplicable_mistral_regex_fix(tmp_path) -> None:
@@ -19,11 +19,11 @@ def test_load_runtime_disables_inapplicable_mistral_regex_fix(tmp_path) -> None:
 
     with (
         patch(
-            "breeze_infer.runtime.AutoTokenizer.from_pretrained",
+            "breeze_tts.infer.runtime.AutoTokenizer.from_pretrained",
             return_value=object(),
         ) as load_tokenizer,
         patch(
-            "breeze_infer.runtime.BreezeForConditionalGeneration.from_pretrained",
+            "breeze_tts.infer.runtime.BreezeForConditionalGeneration.from_pretrained",
             return_value=model,
         ),
         patch.dict(sys.modules, {"qwen_tts": qwen_tts}),

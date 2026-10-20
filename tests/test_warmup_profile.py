@@ -1,21 +1,19 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 import pytest
 
-from models.warmup_profile import load_warmup_profile, parse_warmup_profile
-
-REPO_ROOT = Path(__file__).resolve().parents[1]
+from breeze_tts import FAST_CONFIG_PATH
+from breeze_tts.models.warmup_profile import load_warmup_profile, parse_warmup_profile
 
 
 def _payload() -> dict:
-    return json.loads((REPO_ROOT / "configs" / "fast.json").read_text())
+    return json.loads(FAST_CONFIG_PATH.read_text())
 
 
 def test_bundled_config_covers_cfg1_cfg4_and_voice_direction() -> None:
-    profile = load_warmup_profile(REPO_ROOT / "configs" / "fast.json")
+    profile = load_warmup_profile(FAST_CONFIG_PATH)
 
     assert profile.cfg_scales == (1.0, 4.0)
     assert profile.cfg_modes == ("no_cfg", "single_cfg")

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "breeze-tts-packaged"
+version = "0.1.0"
+description = "Packaged version of the Breeze TTS 2 inference code"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+
+# Note use of blanket ">=" for the time being. requirements.txt keeps upstream's
+# exact tested pins (used by the Docker image).
+# transformers: the model code imports transformers internals; qwen-tts itself
+# pins transformers==4.57.3, which is what this has been tested against.
+# flash-attn is optional and not listed; the bundled entry points use eager attention.
+dependencies = [
+    "torch>=2.8.0",
+    "qwen-tts>=0.1.1",
+    "transformers>=4.57.3",
+    "huggingface-hub>=0.34",
+    "numpy>=2.0",
+    "soundfile>=0.13",
+]
+
+[project.optional-dependencies]
+# Streaming / batch HTTP API (python -m breeze_tts.infer.api)
+server = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "python-multipart>=0.0.18",
+]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/zeropointnine/breeze-tts-packaged"
+Upstream = "https://github.com/breezeblue-ai/breeze-tts"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["breeze_tts*"]
+
+[tool.setuptools.package-data]
+breeze_tts = ["configs/*.json"]

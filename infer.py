@@ -9,18 +9,18 @@ from pathlib import Path
 
 import soundfile as sf
 
-from breeze_infer.runtime import (
+from breeze_tts import FAST_CONFIG_PATH
+from breeze_tts.infer.runtime import (
     load_runtime,
     resolve_device,
     set_all_seeds,
     update_generation_config_for_breeze,
 )
-from breeze_infer.templates import get_template, prepare_inputs, select_template_name
-from models.fast_streaming import FastBreezeStreamingRuntime, FastStreamingConfig
-from models.warmup_profile import load_warmup_profile
+from breeze_tts.infer.templates import get_template, prepare_inputs, select_template_name
+from breeze_tts.models.fast_streaming import FastBreezeStreamingRuntime, FastStreamingConfig
+from breeze_tts.models.warmup_profile import load_warmup_profile
 
-REPO_ROOT = Path(__file__).resolve().parent
-FAST_CONFIG = REPO_ROOT / "configs" / "fast.json"
+FAST_CONFIG = FAST_CONFIG_PATH
 DEFAULT_CFG_SCALE = 1.0
 MAX_NEW_TOKENS = 1500
 MAX_SEQ_LEN = 2048

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import torch
 
-from models.cudagraph.sampling import sample_logits
-from models.logits_process import (
+from breeze_tts.models.cudagraph.sampling import sample_logits
+from breeze_tts.models.logits_process import (
     GeneratedTokenRepetitionPenaltyLogitsProcessor,
     mask_invalid_codec_token_logits,
 )

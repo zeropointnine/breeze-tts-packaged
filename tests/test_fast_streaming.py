@@ -5,8 +5,8 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from breeze_infer.templates import get_template
-from models.fast_streaming import (
+from breeze_tts.infer.templates import get_template
+from breeze_tts.models.fast_streaming import (
     FastBreezeStreamingRuntime,
     FastStreamingConfig,
     _get_dtype,

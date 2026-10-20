@@ -8,7 +8,7 @@ from typing import Any
 
 import torch
 
-from models.cudagraph.depth_decoder_graph import DepthDecoderGraph
+from breeze_tts.models.cudagraph.depth_decoder_graph import DepthDecoderGraph
 
 
 @contextmanager

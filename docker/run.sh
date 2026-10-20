@@ -15,7 +15,7 @@ docker run --rm --gpus all \
   --publish 7860:7860 \
   --volume "$model_path:/models/breeze:ro" \
   "$image_tag" \
-  python -m breeze_infer.api /models/breeze \
+  python -m breeze_tts.infer.api /models/breeze \
     --host 0.0.0.0 \
     --port 7860 \
     "$@"

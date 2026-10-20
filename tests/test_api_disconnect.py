@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 from starlette.requests import ClientDisconnect
 
-from breeze_infer import api
+from breeze_tts.infer import api
 
 
 @pytest.fixture

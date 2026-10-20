@@ -14,8 +14,9 @@ import qwen_tts
 import torch
 import transformers
 
-from models.fast_streaming import FastStreamingConfig
-from models.warmup_profile import load_warmup_profile
+from breeze_tts import FAST_CONFIG_PATH
+from breeze_tts.models.fast_streaming import FastStreamingConfig
+from breeze_tts.models.warmup_profile import load_warmup_profile
 
 EXPECTED = {
     "torch": "2.9.1",
@@ -39,7 +40,7 @@ def main() -> None:
     if not cfg.fast_all:
         raise RuntimeError("fast runtime configuration is unavailable")
 
-    load_warmup_profile(REPO_ROOT / "configs/fast.json")
+    load_warmup_profile(FAST_CONFIG_PATH)
 
     print("Container dependency smoke check passed:", versions)
 

@@ -6,7 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from breeze_infer import api
+from breeze_tts.infer import api
 
 
 @pytest.mark.parametrize("worker_fails", [False, True])

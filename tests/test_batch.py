@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import pytest
 import torch
 
-from breeze_infer.batch import BatchDepthDecoder, eager_batch_modules
+from breeze_tts.infer.batch import BatchDepthDecoder, eager_batch_modules
 
 
 class FakeGraph:
@@ -70,7 +70,7 @@ def test_bucket_sizes_cover_paired_rows_for_max_batch(monkeypatch) -> None:
         def capture(self):
             return self
 
-    monkeypatch.setattr("breeze_infer.batch.DepthDecoderGraph", RecordingGraph)
+    monkeypatch.setattr("breeze_tts.infer.batch.DepthDecoderGraph", RecordingGraph)
     depth_model = torch.nn.Linear(1, 1).to(torch.bfloat16)
     model = SimpleNamespace(
         device=torch.device("cpu"),

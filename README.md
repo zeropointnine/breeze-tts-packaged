@@ -1,3 +1,29 @@
+# breeze-tts-packaged
+
+This is a fork of [breeze-tts](https://github.com/breezeblue-ai/breeze-tts), designed to make it usable as an installable package for the purpose of utilizing its inference-related code.
+
+- Modules have been moved into the `breeze_tts` package, and imports have been edited:
+  - `models/` → `breeze_tts/models/`
+  - `breeze_infer/` → `breeze_tts/infer/` (so `python -m breeze_infer.api` is now `python -m breeze_tts.infer.api`; the commands in the original text below have been updated accordingly)
+  - `configs/` → `breeze_tts/configs/` (shipped as package data; its path is exposed as `breeze_tts.FAST_CONFIG_PATH`)
+- A `pyproject.toml` file has been introduced, with dependencies unpinned. The HTTP API's dependencies are in the optional `server` extra. `requirements.txt` is left as-is, with upstream's exact tested pins (used by the Docker image).
+- flash-attn is not listed as a dependency; it is optional, and the bundled entry points use eager attention.
+- The hardcoded `/tmp` path of the generation warnings log now uses the system temp directory, for portability (eg, Windows).
+- `infer.py`, `tests/` and `docker/` remain at the repository root and work from a clone as before.
+- Model weights are unaffected and remain under the BreezeBlue Research and Non-Commercial License.
+
+Install:
+
+```bash
+pip install git+https://github.com/zeropointnine/breeze-tts-packaged
+# or, including the HTTP API's dependencies:
+pip install "breeze-tts-packaged[server] @ git+https://github.com/zeropointnine/breeze-tts-packaged"
+```
+
+The original README.md text is included below:
+
+---
+
 <div align="center">
   <a href="https://breezeblue.ai/"><img src="assets/breezeblue-logo.png" alt="BreezeBlue" width="35%"></a>
   <br><br>
@@ -146,7 +172,7 @@ python infer.py ../breeze-tts-2 \
 Start the single-concurrency streaming API. It uses the same PyTorch runtime and eager execution by default:
 
 ```bash
-python -m breeze_infer.api ../breeze-tts-2 --host 0.0.0.0 --port 7860
+python -m breeze_tts.infer.api ../breeze-tts-2 --host 0.0.0.0 --port 7860
 ```
 
 Send a Voice Direction request with reference audio and CFG 4:
@@ -167,7 +193,7 @@ The response is streaming mono 24 kHz signed 16-bit little-endian PCM. Start the
 The model argument is either a local checkpoint directory or a Hugging Face repo id. Repo ids are downloaded into the standard Hugging Face cache; pass `--revision` to pin a branch, tag, or commit (ignored for local directories):
 
 ```bash
-python -m breeze_infer.api BreezeBlue/breeze-tts-2 --revision main --host 0.0.0.0 --port 7860
+python -m breeze_tts.infer.api BreezeBlue/breeze-tts-2 --revision main --host 0.0.0.0 --port 7860
 ```
 
 ### 📦 Batch API

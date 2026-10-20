@@ -5,7 +5,7 @@ import pytest
 import soundfile as sf
 import torch
 
-from breeze_infer.templates import (
+from breeze_tts.infer.templates import (
     _encode_prompt_audio,
     get_template,
     select_template_name,
